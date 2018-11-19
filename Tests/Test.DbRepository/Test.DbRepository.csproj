@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFrameworkCore.Procedure" Version="1.0.1-alpha-1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\EntityFrameworkCore.Procedure\EntityFrameworkCore.Procedure.csproj" />
+  </ItemGroup>
+
+</Project>

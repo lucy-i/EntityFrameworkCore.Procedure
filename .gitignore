@@ -1,0 +1,5 @@
+Tests/Procedure.XUnitTest/obj/
+Tests/Test.DbRepository/obj/
+EntityFrameworkCore.Procedure/obj/
+Tests/Procedure.XUnitTest/bin/
+EntityFrameworkCore.Procedure/bin/
