@@ -1,37 +1,14 @@
-## Welcome to GitHub Pages
+# <img src="http://ilucy.in/images/icons/nugetlib.jpg" width="40" title="hover text"> EntityFrameworkCore.Procedure
 
-You can use the [editor on GitHub](https://github.com/lucy-i/EntityFrameworkCore.Procedure/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+<h2><p style="text-align:right"><i>-by <b><a href="http://ilucy.in">iLucy</a></b> </i></p>
+</h2>
+EntityFrameworkCore.Procedure Library is a light weight library to Handle Stored Procedure in a Simple manner. This is extended tool for EntityFrameworkCore.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+You can use the [nuget](https://www.nuget.org/packages/EntityFrameworkCore.Procedure/) to install or use below command in visual studio package manger console.
 
-### Markdown
+`This is a prerelease version of EntityFrameworkCore.Procedure.`
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+**Install-Package EntityFrameworkCore.Procedure -Version 1.0.1-alpha-2**
 
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/lucy-i/EntityFrameworkCore.Procedure/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+#### MIT License
