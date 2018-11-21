@@ -3,3 +3,6 @@ Tests/Test.DbRepository/obj/
 EntityFrameworkCore.Procedure/obj/
 Tests/Procedure.XUnitTest/bin/
 EntityFrameworkCore.Procedure/bin/
+.vs/
+Tests/Test.DbRepository/bin/Debug/netstandard2.0/EntityFrameworkCore.Procedure.dll
+Tests/Test.DbRepository/bin/
