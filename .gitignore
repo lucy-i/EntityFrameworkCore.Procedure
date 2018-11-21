@@ -6,3 +6,5 @@ EntityFrameworkCore.Procedure/bin/
 .vs/
 Tests/Test.DbRepository/bin/Debug/netstandard2.0/EntityFrameworkCore.Procedure.dll
 Tests/Test.DbRepository/bin/
+Test.SQLDatabase/obj/
+Test.SQLDatabase/Import Schema Logs/
