@@ -9,3 +9,5 @@ Tests/Test.DbRepository/bin/
 Test.SQLDatabase/obj/
 Test.SQLDatabase/Import Schema Logs/
 Test.SQLDatabase/Test.SQLDatabase.dbmdl
+Test.SQLDatabase/bin/Debug/Test.SQLDatabase.dll
+Test.SQLDatabase/bin/
