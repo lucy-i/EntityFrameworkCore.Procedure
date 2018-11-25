@@ -24,10 +24,10 @@ namespace Test.DbRepository.Models
     public class SubjectMarkYearReportMultiSet : MultiResult
     {
         [ResultSet(0)]
-        public  ResultCollection<Student> Strudents { get; set; }
+        public  RCollection<Student> Strudents { get; set; }
         [ResultSet(2)]
-        public ResultCollection<Mark> Marks { get; set; }
+        public RCollection<Mark> Marks { get; set; }
         [ResultSet(1)]
-        public ResultCollection<Subject> Subjects { get; set; }
+        public RCollection<Subject> Subjects { get; set; }
     }
 }

@@ -8,36 +8,42 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace EntityFrameworkCore.Procedure
 {
-    public class ResultCollection<T> : List<T> where T : class, new()
+    /// <summary>
+    /// Extended Type to store List Collection
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class RCollection<T> : List<T> where T : class, new()
     {
         public readonly Type type;
 
-        public ResultCollection()
+        public RCollection()
         {
             type = typeof(T);
         }
 
-        public ResultCollection(IEnumerable<T> collection) : base(collection)
+        public RCollection(IEnumerable<T> collection) : base(collection)
         {
             type = typeof(T);
         }
 
-        public ResultCollection(int capacity) : base(capacity)
+        public RCollection(int capacity) : base(capacity)
         {
             type = typeof(T);
         }
     }
 
+    /// <summary>
+    /// Abstract Class for Poco having Multi Result
+    /// </summary>
     public abstract class MultiResult
     {
         internal List<MultiResultProp> GetProperties()
         {
             Type t = this.GetType();
-            List<PropertyInfo> props = t.GetProperties().Where(p => p.PropertyType.FullName.StartsWith("EntityFrameworkCore.Procedure.ResultCollection")).ToList();
+            List<PropertyInfo> props = t.GetProperties().Where(p => p.PropertyType.FullName.StartsWith("EntityFrameworkCore.Procedure.RCollection")).ToList();
 
             return null;
         }
@@ -51,9 +57,9 @@ namespace EntityFrameworkCore.Procedure
     }
 
 
-    public class ProcSingleSet<Input, T> : ProcSingleSet<T> where T : class, new() where Input : ProcedureParam
+    public class SingleSet<Input, T> : SingleSet<T> where T : class, new() where Input : ProcedureParam
     {
-        internal ProcSingleSet(DbContext context, string name, string schema = "dbo") : base(context, name, schema)
+        public SingleSet(DbContext context, string name, string schema = "dbo") : base(context, name, schema)
         {
 
         }
@@ -71,11 +77,11 @@ namespace EntityFrameworkCore.Procedure
 
     }
 
-    public sealed class ProcMultiSet<Input, T> : ProcMultiSet<T> where T : MultiResult, new() where Input : ProcedureParam
+    public sealed class MultiSet<Input, T> : MultiSet<T> where T : MultiResult, new() where Input : ProcedureParam
     {
         internal Dictionary<int, MultiResultProp> resultSetInfo = new Dictionary<int, MultiResultProp>();
 
-        public ProcMultiSet(DbContext context, string name, string schema = "dbo") : base(context, name, schema)
+        public MultiSet(DbContext context, string name, string schema = "dbo") : base(context, name, schema)
         {
 
         }
@@ -105,7 +111,7 @@ namespace EntityFrameworkCore.Procedure
             return null;
         }
 
-        public void MapResultSet<Type>(int order, Func<T, ResultCollection<Type>> type) where Type : class, new()
+        public void MapResultSet<Type>(int order, Func<T, RCollection<Type>> type) where Type : class, new()
         {
             if (resultSetOrder.ContainsKey(order))
             {
@@ -115,10 +121,10 @@ namespace EntityFrameworkCore.Procedure
         }
     }
 
-    public class ProcMultiSet<T> : ProcSingleSet<T> where T : MultiResult, new()
+    public class MultiSet<T> : SingleSet<T> where T : MultiResult, new()
     {
         protected Dictionary<int, Type> resultSetOrder = new Dictionary<int, Type>();
-        public ProcMultiSet(DbContext context, string name, string schema = "dbo") : base(context, name, schema)
+        public MultiSet(DbContext context, string name, string schema = "dbo") : base(context, name, schema)
         {
 
         }
@@ -139,7 +145,7 @@ namespace EntityFrameworkCore.Procedure
         }
     }
 
-    public class ProcSingleSet<T> where T : class, new()
+    public class SingleSet<T> where T : class, new()
     {
         public string ProcName { get; private set; } = string.Empty;
         public string Schema { get; private set; } = string.Empty;
@@ -147,7 +153,7 @@ namespace EntityFrameworkCore.Procedure
 
         private readonly DbContext _context;
 
-        internal ProcSingleSet(DbContext context, string name, string schema = "dbo")
+        public SingleSet(DbContext context, string name, string schema = "dbo")
         {
             _context = context;
             ProcName = name;

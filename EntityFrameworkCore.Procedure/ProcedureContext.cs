@@ -19,7 +19,7 @@ namespace EntityFrameworkCore.Procedure
 
         private void InitProcedureSet()
         {
-            var properties = this.GetType().GetProperties().Where(t => t.PropertyType.FullName.StartsWith("EntityFrameworkCore.Procedure.ProcedureSet") && t.PropertyType.IsPublic && t.CanWrite && t.CanWrite);
+            var properties = this.GetType().GetProperties().Where(t => (t.PropertyType.FullName.StartsWith("EntityFrameworkCore.Procedure.SingleSet")|| t.PropertyType.FullName.StartsWith("EntityFrameworkCore.Procedure.MultiSet")) && t.PropertyType.IsPublic && t.CanWrite && t.CanWrite);
             foreach (var item in properties)
             {
                 Type propType = item.PropertyType;
