@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{5df6dc5e-46f7-4711-967f-539ca22d0565}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -25,6 +25,7 @@
     <TargetDatabaseSet>True</TargetDatabaseSet>
     <DefaultCollation>Latin1_General_CI_AI</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <IncludeSchemaNameInFileName>True</IncludeSchemaNameInFileName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -66,5 +67,7 @@
     <Build Include="Tables\SimpleModel.sql" />
     <Build Include="Stored Procedures\Sp_SimpleResult_Without_Param.sql" />
     <Build Include="Stored Procedures\Sp_With_Param.sql" />
+    <Build Include="Stored Procedures\Sp_With_Param_AnReturnList.sql" />
+    <Build Include="Stored Procedures\Sp_With_All_SQL_DataType_As_Params.sql" />
   </ItemGroup>
 </Project>

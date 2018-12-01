@@ -22,13 +22,15 @@ namespace Test.DbRepository
             base.OnSetCreation();
         }
 
-        public ProcSingleSet<SimpleModel> Sp_SimpleResult_Without_Param { get; set; }
+        public SingleSet<SimpleModel> Sp_SimpleResult_Without_Param { get; set; }
 
         [Procedure("Sp_SimpleResult_Without_Param")]
-        public ProcSingleSet<SimpleInValidColumnModel> Sp_SimpleResult_Without_Param_InValidColumn { get; set; }
+        public SingleSet<SimpleInValidColumnModel> Sp_SimpleResult_Without_Param_InValidColumn { get; set; }
 
-        public ProcSingleSet<SimpleParamModel,object> Sp_With_Param { get; set; }
+        public SingleSet<object> Sp_With_All_SQL_DataType_As_Params { get; set; }
 
-        public ProcMultiSet<SimpleParamModel, SubjectMarkYearReportMultiSet> Sp_With_Param_new { get; set; }
+        public SingleSet<SimpleParamModel,object> Sp_With_Param { get; set; }
+
+        public MultiSet<SimpleParamModel, SubjectMarkYearReportMultiSet> Sp_With_Param_new { get; set; }
     }
 }

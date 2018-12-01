@@ -10,7 +10,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.1-alpha-1</Version>
+    <Version>1.0.1-alpha-3</Version>
     <Authors>iLucy</Authors>
     <Description>EntityFrameworkCore.Procedure Library is a light weight library to Handle Stored Procedure in a Simple manner. This is extended tool for EntityFrameworkCore.</Description>
     <Copyright>MIT Licence</Copyright>
@@ -18,8 +18,8 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <NeutralLanguage>af</NeutralLanguage>
     <ApplicationIcon>procedure.ico</ApplicationIcon>
-    <AssemblyVersion>1.0.1.1</AssemblyVersion>
-    <FileVersion>1.0.1.1</FileVersion>
+    <AssemblyVersion>1.0.1.3</AssemblyVersion>
+    <FileVersion>1.0.1.3</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
