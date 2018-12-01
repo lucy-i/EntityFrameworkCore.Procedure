@@ -17,7 +17,7 @@ CREATE PROCEDURE [dbo].[Sp_With_All_SQL_DataType_As_Params]
 		@small_money smallmoney,
 		@float float(4),
 		@real real,
-		@date_time datetime,
+		@date_time datetime2,
 		@small_date_time smalldatetime,
 		@char char,
 		@varchar varchar(100),
@@ -27,7 +27,7 @@ CREATE PROCEDURE [dbo].[Sp_With_All_SQL_DataType_As_Params]
 		@ntext ntext,
 		@binary binary(5000),
 		@varbinary varbinary(4000),
-		@image image,
+		--@image image,
 		@timestamp timestamp,
 		@uniqueidentifier uniqueidentifier
 		)		
@@ -36,8 +36,9 @@ BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
+
+	select @date_time as date_time,@small_date_time small_date_time
 			
 END
-
 
 

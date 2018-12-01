@@ -3,8 +3,10 @@ using EntityFrameworkCore.Procedure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace EntityFrameworkCore.Procedure
 {
@@ -33,6 +35,11 @@ namespace EntityFrameworkCore.Procedure
             ProcName = name;
             Schema = schema;
         }
+        public T FirstRow()
+        {
+            bool hasValue;
+            return Execute($"{Schema}.{ProcName}", reader => reader.GetResult<T>(out hasValue));
+        }
 
         public T FirstRow(params SqlParameter[] parameters)
         {
@@ -40,11 +47,93 @@ namespace EntityFrameworkCore.Procedure
             return Execute($"{Schema}.{ProcName}", reader => reader.GetResult<T>(out hasValue), parameters);
         }
 
+        public T FirstRow(Dictionary<string, object> parameters)
+        {
+            SqlParameter sd = new SqlParameter("", SqlDbType.DateTime);
+            bool hasValue;
+            return Execute($"{Schema}.{ProcName}", reader => reader.GetResult<T>(out hasValue), parameters.Select(t => new SqlParameter(GetParamName(t.Key), GetSqlValue(t.Value))).ToArray());
+        }
+
+        public T FirstRow(params Tuple<string, DbType, object>[] parameters)
+        {
+            bool hasValue;
+            return Execute($"{Schema}.{ProcName}", reader => reader.GetResult<T>(out hasValue), parameters.Select(t => new SqlParameter(GetParamName(t.Item1), t.Item2)
+            {
+                Value = GetSqlValue(t.Item2, t.Item3)
+            }).ToArray());
+        }
+
         public ICollection<T> FirstResult(params SqlParameter[] parameters)
         {
             return Execute($"{Schema}.{ProcName}", reader => reader.GetResults<T>(), parameters);
         }
 
+        protected string GetParamName(string name)
+        {
+            name = name.Trim();
+            if (name.StartsWith("@"))
+                return name;
+            return $"@{name}";
+        }
+
+        protected object GetSqlValue(object value)
+        {
+            if (value.GetType().Name == typeof(DateTime).Name)
+            {
+                var tempValue = (DateTime)value;
+                return tempValue.ToString("yyyy-MM-ddThh:mm:ss");
+            }
+            return value;
+        }
+
+        protected object GetSqlValue(DbType type, object value)
+        {
+            switch (type)
+            {
+                case DbType.AnsiString:
+                case DbType.AnsiStringFixedLength:
+                case DbType.Binary:
+                case DbType.Boolean:
+                case DbType.Byte:
+                case DbType.Currency:
+                    return value;
+                case DbType.Date:
+                    var tempValue = (DateTime)value;
+                    return tempValue.ToString("yyyy-MM-dd");
+                case DbType.DateTime:
+                    var tempValue2 = (DateTime)value;
+                    return tempValue2.ToString("yyyy-MM-ddThh:mm:ss");
+                case DbType.DateTime2:
+                    var tempValue3 = (DateTime)value;
+                    return tempValue3.ToString("yyyy-MM-ddThh:mm:ss.FFFF");
+                case DbType.DateTimeOffset:
+                    var tempValue4 = (DateTime)value;
+                    return tempValue4.ToString("o");
+                case DbType.Decimal:
+                case DbType.Double:
+                case DbType.Guid:
+                case DbType.Int16:
+                case DbType.Int32:
+                case DbType.Int64:
+                case DbType.SByte:
+                case DbType.Single:
+                case DbType.String:
+                    return value;
+                case DbType.StringFixedLength:
+                    return value;
+                case DbType.Time:
+                    return value;
+                case DbType.UInt16:
+                case DbType.UInt32:
+                case DbType.UInt64:
+                case DbType.VarNumeric:
+                case DbType.Xml:
+                    return value;
+                default:
+                    return value;
+
+            }
+        }
 
         protected IList<TData> Execute<TData>(string procName,
          Func<DbDataReader, IList<TData>> modelBinder,
