@@ -8,7 +8,7 @@ You can use the [nuget](https://www.nuget.org/packages/EntityFrameworkCore.Proce
 
 <i>This is a prerelease version of EntityFrameworkCore.Procedure.</i>
 
-**`Install-Package EntityFrameworkCore.Procedure -Version 1.0.1-alpha-2`**
+**`Install-Package EntityFrameworkCore.Procedure -Version 1.0.1-alpha-3`**
 
 
 #### MIT License
