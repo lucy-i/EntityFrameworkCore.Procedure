@@ -14,17 +14,14 @@ namespace EntityFrameworkCore.Procedure
 
         }
 
-        private void InitResultProperty()
-        {
-            //resultSetInfo.Add()
-        }
+       
 
         public T FirstRow(Input input)
         {
             return FirstRow(input.ToParam());
         }
 
-        public ICollection<T> FirstResult(Input input)
+        public IEnumerable<T> FirstResult(Input input)
         {
             return FirstResult(input.ToParam());
         }
@@ -36,7 +33,7 @@ namespace EntityFrameworkCore.Procedure
 
         public T MultiResult(Input input)
         {
-            return null;
+            return MultiResult(input.ToParam());
         }
 
         public void MapResultSet<Type>(int order, Func<T, RCollection<Type>> type) where Type : class, new()

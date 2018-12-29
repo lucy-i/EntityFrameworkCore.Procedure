@@ -96,7 +96,7 @@ namespace EntityFrameworkCore.Procedure.Extensions
             return list;
         }
 
-        internal static List<IEnumerable> GetMultiResults<T>(this DbDataReader reader, Dictionary<int, MultiResultProp> resultSetOrder,T result)
+        internal static T GetMultiResults<T>(this DbDataReader reader, Dictionary<int, MultiResultProp> resultSetOrder,T result)
         {
             Type t = typeof(T);
             List<IEnumerable> list = new List<IEnumerable>();
@@ -120,10 +120,10 @@ namespace EntityFrameworkCore.Procedure.Extensions
                 if (!reader.NextResult())
                     break;
             }
-            return list;
+            return result;
         }
 
-        internal static List<IEnumerable> GetMultiResults<Result>(this DbDataReader reader, Dictionary<int, Type> resultSetOrder,Result result)
+        internal static IEnumerable<IEnumerable> GetMultiResults(this DbDataReader reader, Dictionary<int, Type> resultSetOrder)
         {
             List<IEnumerable> list = new List<IEnumerable>();
             int[] keys = resultSetOrder.Keys.OrderBy(t => t).ToArray();

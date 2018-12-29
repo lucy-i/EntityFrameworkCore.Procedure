@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EntityFrameworkCore.Procedure.Extensions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Text;
+using System.Linq;
 
 namespace EntityFrameworkCore.Procedure
 {
@@ -15,10 +16,29 @@ namespace EntityFrameworkCore.Procedure
 
         }
 
+        private void InitResultProperty()
+        {
+            var tempResult = new T();
+            var properties = tempResult.GetProperties();
+            properties.OrderBy(o => o.Order).ToList().ForEach(t =>
+             {
+                 resultSetOrder.Add(t.Order, t.Info.PropertyType);
+             });            
+        }
+
         public IEnumerable AsEnumerable(params SqlParameter[] parameters)
         {
-            return null;
+            return Execute<MultiResult, IEnumerable<IEnumerable>>(ProcName, reader => reader.GetMultiResults(resultSetOrder), parameters);
         }
+
+
+        public T MultiResult(params SqlParameter[] parameters)
+        {
+            T result = new T();
+            return Execute<MultiResult, T>(ProcName, reader => reader.GetMultiResults(result.GetPropertyAsDictionary(), result), parameters);
+        }
+
+
 
         public void MapResultSet(int order, Type type)
         {
