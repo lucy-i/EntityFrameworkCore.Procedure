@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Test.DbRepository;
 using Test.DbRepository.Models;
+using Test.DbRepository.Models.Parameters;
 using Xunit;
 
 namespace Procedure.XUnitTest
@@ -68,7 +69,11 @@ namespace Procedure.XUnitTest
         {
             try
             {
-                SubjectMarkYearReportMultiSet result= spContext.Sp_With_Param_new.MultiResult(null);                
+                SubjectMarkYearReportMultiSet result= spContext.Sp_With_Param_AnReturnList.MultiResult(new SimpleParamModel() {
+                    Id=1,
+                    Name="Ram",
+                    UpdatedDate=DateTime.Now
+                });                
             }
             catch (Exception ex)
             {

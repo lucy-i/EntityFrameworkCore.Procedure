@@ -19,10 +19,10 @@ namespace EntityFrameworkCore.Procedure
                 return prop;
 
             var props = GetProperties();
-
+            prop = new Dictionary<int, MultiResultProp>();
             props.OrderBy(o => o.Order).ToList().ForEach(each =>
               {
-                  prop.Add(i, each);
+                  prop.Add(each.Order, each);
               });
 
             return prop;
