@@ -15,10 +15,10 @@ namespace Test.DbRepository
 
         protected override void OnSetCreation()
         {
-            this.Sp_With_Param_new.MapResultSet(0, t=>t.Strudents);
-            this.Sp_With_Param_new.MapResultSet(0, typeof(Student));
-            this.Sp_With_Param_new.MapResultSet(1, typeof(Subject));
-            this.Sp_With_Param_new.MapResultSet(2, typeof(Mark));
+            //this.Sp_With_Param_new.MapResultSet(0, t=>t.Strudents);
+            //this.Sp_With_Param_new.MapResultSet(0, typeof(Student));
+            //this.Sp_With_Param_new.MapResultSet(1, typeof(Subject));
+            //this.Sp_With_Param_new.MapResultSet(2, typeof(Mark));
             base.OnSetCreation();
         }
 
@@ -31,6 +31,6 @@ namespace Test.DbRepository
 
         public SingleSet<SimpleParamModel,object> Sp_With_Param { get; set; }
 
-        public MultiSet<SimpleParamModel, SubjectMarkYearReportMultiSet> Sp_With_Param_new { get; set; }
+        public MultiSet<SimpleParamModel, SubjectMarkYearReportMultiSet> Sp_With_Param_AnReturnList { get; set; }
     }
 }

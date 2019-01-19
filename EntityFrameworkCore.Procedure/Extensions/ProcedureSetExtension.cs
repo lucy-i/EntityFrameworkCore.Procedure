@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
-using System.Text;
 
 namespace EntityFrameworkCore.Procedure.Extensions
 {
@@ -96,34 +95,32 @@ namespace EntityFrameworkCore.Procedure.Extensions
             return list;
         }
 
-        internal static List<IEnumerable> GetMultiResults<T>(this DbDataReader reader, Dictionary<int, MultiResultProp> resultSetOrder,T result)
+        internal static T GetMultiResults<T>(this DbDataReader reader, Dictionary<int, MultiResultProp> resultSetOrder, T result)
         {
             Type t = typeof(T);
-            List<IEnumerable> list = new List<IEnumerable>();
             int[] keys = resultSetOrder.Keys.OrderBy(o => o).ToArray();
-            List<object> onbjList = new List<object>();
             foreach (var item in keys)
             {
-                Activator.CreateInstance(resultSetOrder[item].Info.PropertyType);
+                var objResult = Activator.CreateInstance(resultSetOrder[item].Info.PropertyType);
+                var method = objResult.GetType().GetMethod("Add");
+                Type rr = objResult.GetType().GenericTypeArguments.First();
                 bool hasValue;
                 do
                 {
-                    object objectitem = reader.GetResult(resultSetOrder[item].Info.PropertyType, out hasValue);
+                    object objectitem = reader.GetResult(rr, out hasValue);
                     if (objectitem != null)
-                        onbjList.Add(objectitem);
+                        method.Invoke(objResult, new object[] { objectitem });
                 } while (hasValue);
 
-                list.Add(onbjList);
-
-                resultSetOrder[item].Info.SetValue(result, list);
+                resultSetOrder[item].Info.SetValue(result, objResult);
 
                 if (!reader.NextResult())
                     break;
             }
-            return list;
+            return result;
         }
 
-        internal static List<IEnumerable> GetMultiResults<Result>(this DbDataReader reader, Dictionary<int, Type> resultSetOrder,Result result)
+        internal static IEnumerable<IEnumerable> GetMultiResults(this DbDataReader reader, Dictionary<int, Type> resultSetOrder)
         {
             List<IEnumerable> list = new List<IEnumerable>();
             int[] keys = resultSetOrder.Keys.OrderBy(t => t).ToArray();
@@ -153,7 +150,7 @@ namespace EntityFrameworkCore.Procedure.Extensions
             {
                 return Convert.ChangeType(reader[name], type);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }

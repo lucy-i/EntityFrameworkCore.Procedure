@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace EntityFrameworkCore.Procedure
 {
@@ -10,12 +9,42 @@ namespace EntityFrameworkCore.Procedure
     /// </summary>
     public abstract class MultiResult
     {
-        internal List<MultiResultProp> GetProperties()
-        {
-            Type t = this.GetType();
-            List<PropertyInfo> props = t.GetProperties().Where(p => p.PropertyType.FullName.StartsWith("EntityFrameworkCore.Procedure.RCollection")).ToList();
+        private Dictionary<int, MultiResultProp> prop = null;
+        private MultiResultProp[] propList = null;
 
-            return null;
+        internal Dictionary<int, MultiResultProp> GetPropertyAsDictionary()
+        {
+            int i = 0;
+            if (prop != null)
+                return prop;
+
+            var props = GetProperties();
+            prop = new Dictionary<int, MultiResultProp>();
+            props.OrderBy(o => o.Order).ToList().ForEach(each =>
+              {
+                  prop.Add(each.Order, each);
+              });
+
+            return prop;
+        }
+
+        internal MultiResultProp[] GetProperties()
+        {
+            if (propList != null)
+                return propList;
+
+            Type t = this.GetType();
+            int i = 0;
+
+            propList = t.GetProperties().Where(p => p.PropertyType.FullName.StartsWith("EntityFrameworkCore.Procedure.RCollection")).Select(each =>
+                new MultiResultProp
+                {
+                    Name = each.Name,
+                    Info = each,
+                    Order = i++
+                }).ToArray();
+
+            return propList;
         }
     }
 }

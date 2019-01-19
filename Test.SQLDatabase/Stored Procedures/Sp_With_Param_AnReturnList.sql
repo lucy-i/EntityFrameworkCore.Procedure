@@ -16,7 +16,8 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 
-	Select @Id Id, @Name [Name],@UpdatedDate [Date]
+	Select @Id Id, @Name [Name],@UpdatedDate [UpdatedDate]
+	Select @Id Id, @Name [Name],@UpdatedDate [UpdatedDate]
 END
 
 

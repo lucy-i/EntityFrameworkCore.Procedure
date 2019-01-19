@@ -15,7 +15,7 @@ namespace EntityFrameworkCore.Procedure
             return FirstRow(input.ToParam());
         }
 
-        public ICollection<T> FirstResult(Input input)
+        public IEnumerable<T> FirstResult(Input input)
         {
             return FirstResult(input.ToParam());
         }
