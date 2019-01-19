@@ -20,6 +20,11 @@
     <ApplicationIcon>procedure.ico</ApplicationIcon>
     <AssemblyVersion>1.0.1.4</AssemblyVersion>
     <FileVersion>1.0.1.4</FileVersion>
+    <PackageProjectUrl>https://github.com/lucy-i/EntityFrameworkCore.Procedure</PackageProjectUrl>
+    <PackageLicenseUrl>http://ilucy.in/license.html</PackageLicenseUrl>
+    <PackageIconUrl>https://camo.githubusercontent.com/78424f3316943f9cbfe9ed237b1648aa2a7b67a0/687474703a2f2f696c7563792e696e2f696d616765732f69636f6e732f6e756765746c69622e6a7067</PackageIconUrl>
+    <RepositoryUrl>https://github.com/lucy-i/EntityFrameworkCore.Procedure</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
