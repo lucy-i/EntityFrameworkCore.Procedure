@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Common;
 using System.Linq;
 
@@ -44,8 +45,14 @@ namespace EntityFrameworkCore.Procedure.Extensions
 
                 foreach (var item in props)
                 {
+                    string columnName = item.Name;
                     Type propType = item.PropertyType;
-                    int ordinal = reader.GetOrdinal(item.Name);
+                    var attr = item.GetCustomAttributes(typeof(ColumnAttribute), true);
+                    if (attr != null && attr.Length > 0)
+                    {
+                        columnName = (attr[0] as ColumnAttribute).Name;
+                    }
+                    int ordinal = reader.GetOrdinal(columnName);
                     if (ordinal < 0)
                         continue;
                     if (!reader.IsDBNull(ordinal))

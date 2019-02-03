@@ -32,5 +32,9 @@ namespace Test.DbRepository
         public SingleSet<SimpleParamModel,object> Sp_With_Param { get; set; }
 
         public MultiSet<SimpleParamModel, SubjectMarkYearReportMultiSet> Sp_With_Param_AnReturnList { get; set; }
+        [Procedure("GetCustomerOrderDetails")]
+        public SingleSet<CustomerOrderDetail> CustomerOrderDetails { get; set; }
+        [Procedure("GetCustomer")]
+        public SingleSet<Customer> GetCustomers { get; set; }
     }
 }
