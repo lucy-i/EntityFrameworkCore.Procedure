@@ -6,6 +6,6 @@ namespace Procedure.XUnitTest
 {
     class Constants
     {
-        public const string ConnectionString = "Data Source=LUCY-AD01\\SQLEXPRESS;Initial Catalog=TestProcedureSQL;Integrated Security=True";
+        public const string ConnectionString = "Data Source=LUCY-AD01\\SQLEXPRESS;Initial Catalog=SampleData;Integrated Security=True";
     }
 }

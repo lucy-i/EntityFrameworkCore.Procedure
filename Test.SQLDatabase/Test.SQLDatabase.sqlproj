@@ -69,5 +69,16 @@
     <Build Include="Stored Procedures\Sp_With_Param.sql" />
     <Build Include="Stored Procedures\Sp_With_Param_AnReturnList.sql" />
     <Build Include="Stored Procedures\Sp_With_All_SQL_DataType_As_Params.sql" />
+    <Build Include="Tables\dbo.Supplier.sql" />
+    <Build Include="Tables\dbo.Product.sql" />
+    <Build Include="Tables\dbo.OrderItem.sql" />
+    <Build Include="Tables\dbo.Order.sql" />
+    <Build Include="Tables\dbo.Customer.sql" />
+    <Build Include="Stored Procedures\dbo.GetCustomerOrderDetails.sql" />
+    <Build Include="Stored Procedures\dbo.GetCustomer.sql" />
+    <Build Include="Stored Procedures\dbo.GetProducts.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.DataLoad.sql" />
   </ItemGroup>
 </Project>
